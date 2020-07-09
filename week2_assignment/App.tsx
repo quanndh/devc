@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,22 +8,38 @@ const POLO_BLUE_COLOR = 'rgb(51,60,87)';
 const FOLLOW_COLOR = 'rgb(71,113,246)';
 const SEND_MESSAGE_COLOR = 'rgb(120,213,250)';
 
-const imgs = [
-  { id: 1, imgSource: require('./assets/1.jpg') },
-  { id: 2, imgSource: require('./assets/2.jpg') },
-  { id: 3, imgSource: require('./assets/3.jpg') },
-  { id: 4, imgSource: require('./assets/4.jpg') },
-  { id: 5, imgSource: require('./assets/5.jpg') },
-  { id: 6, imgSource: require('./assets/1.jpg') },
-  { id: 7, imgSource: require('./assets/1.jpg') },
-  { id: 8, imgSource: require('./assets/1.jpg') },
-  { id: 9, imgSource: require('./assets/1.jpg') },
+interface Image {
+  id: number,
+  width?: number,
+  imgSource: any,
+  height?: number
+}
 
+const data: Image[] = [
+  { id: 1, imgSource: require('./assets/1.jpg'), width: 0, height: 0 },
+  { id: 2, imgSource: require('./assets/2.jpg'), width: 0, height: 0 },
+  { id: 3, imgSource: require('./assets/3.jpg'), width: 0, height: 0 },
+  { id: 4, imgSource: require('./assets/4.jpg'), width: 0, height: 0 },
+  { id: 5, imgSource: require('./assets/5.jpg'), width: 0, height: 0 },
+  { id: 6, imgSource: require('./assets/1.jpg'), width: 0, height: 0 },
+  { id: 7, imgSource: require('./assets/1.jpg'), width: 0, height: 0 },
+  { id: 8, imgSource: require('./assets/1.jpg'), width: 0, height: 0 },
+  { id: 9, imgSource: require('./assets/1.jpg'), width: 0, height: 0 },
 ]
 
-const centerImgData = Math.floor(imgs.length / 2);
-
 export default function App() {
+
+  const [imgs, setImgs] = useState<Image[]>(data);
+
+  const handleResize = (index: number, width: number, height: number) => {
+    let temp = [...imgs];
+    temp[index].width = 140;
+    temp[index].height = 140 / (width / height);
+    setImgs(temp)
+  }
+
+  // console.log(imgs)
+
   return (
     <View style={styles.container}>
       {/* <StatusBar style="light"/> */}
@@ -40,7 +56,7 @@ export default function App() {
               Quan nguyen
             </Text>
             <Text style={styles.subtitle}>
-              Devloper
+              Developer
             </Text>
           </View>
           <View style={styles.headerRow}>
@@ -82,15 +98,37 @@ export default function App() {
             flexWrap: "wrap",
             flexDirection: "row"
           }}>
-          {
-            imgs.map(item => {
-              return (
-                <TouchableOpacity key={item.id} style={{ padding: 0, margin: 0 }}>
-                  <Image source={item.imgSource} style={styles.image} />
-                </TouchableOpacity>
-              )
-            })
-          }
+          <View>
+            {
+              imgs.slice(0, Math.round(imgs.length / 2)).map((item, index) => {
+                return (
+                  <TouchableOpacity key={item.id} style={{ padding: 0, margin: 0 }}>
+                    <Image
+                      onLoad={event => { handleResize(index, event.nativeEvent.source.width, event.nativeEvent.source.height) }}
+                      source={item.imgSource}
+                      style={[styles.image, item.width && item.height ? { width: item.width, height: item.height } : {}]}
+                    />
+                  </TouchableOpacity>
+                )
+              })
+            }
+          </View>
+          <View>
+            {
+              imgs.slice(Math.round(imgs.length / 2)).map((item, index) => {
+                return (
+                  <TouchableOpacity key={item.id} style={{ padding: 0, margin: 0 }}>
+                    <Image
+                      onLoad={event => { handleResize(index, event.nativeEvent.source.width, event.nativeEvent.source.height) }}
+                      source={item.imgSource}
+                      style={[styles.image, item.width && item.height ? { width: item.width, height: item.height } : {}]}
+                    />
+                  </TouchableOpacity>
+                )
+              })
+            }
+          </View>
+
         </ScrollView>
       </View>
 
@@ -183,12 +221,16 @@ const styles = StyleSheet.create({
   imageGallery: {
     flex: 1,
     flexGrow: 1,
+    padding: 0,
+    alignItems: "flex-start"
   },
   image: {
     width: 140,
-    height: 160,
     margin: 8,
-    borderRadius: 20
+    height: 160,
+    borderRadius: 20,
+    alignSelf: "flex-start",
+    // backgroundColor: "red",
   },
   avatar: {
     width: 120,

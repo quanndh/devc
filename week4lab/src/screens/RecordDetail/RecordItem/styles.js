@@ -5,6 +5,12 @@ export default StyleSheet.create({
     container: {
         flexDirection: 'row',
     },
+    image: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        marginRight: 16
+    },
     iconContainer: {
         width: 60,
         height: 60,

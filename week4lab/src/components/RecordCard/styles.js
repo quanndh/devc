@@ -4,7 +4,8 @@ import Colors from '../../constant/Colors';
 export default StyleSheet.create({
     container: {
         paddingLeft: "10%",
-        height: 120
+        height: 120,
+        marginVertical: 2
     },
     info: {
         justifyContent: "center",

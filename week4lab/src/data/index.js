@@ -22,7 +22,7 @@ export const detail = [
     spend_money: 250,
     date_time: "2020/07/23",
     production_name: "meat",
-    production_image: "https://sharpmagazineme.com/uploads/2018/10/05102018195139.jpg"
+    production_image: null
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ export const detail = [
     spend_money: 100,
     date_time: "2020/07/23",
     production_name: "Dress",
-    production_image: "https://www.yourwdwstore.net/assets/images/6/60000/3000/700/63764-s1.jpg"
+    production_image: null
   },
   {
     id: 4,
@@ -76,7 +76,7 @@ export const detail = [
     spend_money: 100,
     date_time: "2020/07/23",
     production_name: "Office",
-    production_image: "https://assets.iwgplc.com/image/upload/Regus/Website/homepage-product-office-space.jpg"
+    production_image: null
   },
   {
     id: 8,

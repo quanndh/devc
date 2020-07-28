@@ -86,5 +86,41 @@ export const detail = [
     date_time: "2020/07/23",
     production_name: "Tomato",
     production_image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Bright_red_tomato_and_cross_section02.jpg/1280px-Bright_red_tomato_and_cross_section02.jpg"
-  }
+  },
+  {
+    id: 1565,
+    category: 1,
+    type: 2,
+    spend_money: 250,
+    date_time: "2020/07/23",
+    production_name: "meat",
+    production_image: null
+  },
+  {
+    id: 10000,
+    category: 1,
+    type: 2,
+    spend_money: 250,
+    date_time: "2020/07/23",
+    production_name: "meat",
+    production_image: null
+  },
+  {
+    id: 1000,
+    category: 1,
+    type: 2,
+    spend_money: 250,
+    date_time: "2020/07/23",
+    production_name: "meat",
+    production_image: null
+  },
+  {
+    id: 100,
+    category: 1,
+    type: 2,
+    spend_money: 250,
+    date_time: "2020/07/23",
+    production_name: "meat",
+    production_image: null
+  },
 ]

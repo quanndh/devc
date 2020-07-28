@@ -32,7 +32,7 @@ const App: () => React$Node = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.backgroundColor,
+    backgroundColor: Colors.background,
     flex: 1,
   },
 });

@@ -4,7 +4,8 @@ import Colors from "../../constant/Colors";
 export default StyleSheet.create({
     container: {
         flex: 1,
-        padding: 12
+        padding: 12,
+        backgroundColor: Colors.background,
     },
     statistic: {
         flexDirection: "row",

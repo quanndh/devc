@@ -69,7 +69,7 @@ export default function App() {
       <View
         style={styles.header}
       >
-        <View style={{ width: 27 }} />
+        {/* <View style={{ width: 27 }} /> */}
         <Image
           source={{
             uri:

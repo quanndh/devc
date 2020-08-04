@@ -30,15 +30,21 @@ const data: Image[] = [
 export default function App() {
 
   const [imgs, setImgs] = useState<Image[]>(data);
+  const [imgs1, setImgs1] = useState<Image[]>(data.slice(0, Math.round(imgs.length / 2)));
+  const [imgs2, setImgs2] = useState<Image[]>(data.slice(Math.round(imgs.length / 2)));
 
-  const handleResize = (index: number, width: number, height: number) => {
-    let temp = [...imgs];
+  const handleResize1 = (index: number, width: number, height: number) => {
+    let temp = [...imgs1];
     temp[index].width = 140;
     temp[index].height = 140 / (width / height);
-    setImgs(temp)
+    setImgs1(temp)
   }
-
-  // console.log(imgs)
+  const handleResize2 = (index: number, width: number, height: number) => {
+    let temp = [...imgs2];
+    temp[index].width = 140;
+    temp[index].height = 140 / (width / height);
+    setImgs2(temp)
+  }
 
   return (
     <View style={styles.container}>
@@ -98,13 +104,16 @@ export default function App() {
             flexWrap: "wrap",
             flexDirection: "row"
           }}>
-          <View>
+          <View style={{backgroundColor: 'yellow'}}>
             {
-              imgs.slice(0, Math.round(imgs.length / 2)).map((item, index) => {
+              imgs1.map((item, index) => {
                 return (
                   <TouchableOpacity key={item.id} style={{ padding: 0, margin: 0 }}>
                     <Image
-                      onLoad={event => { handleResize(index, event.nativeEvent.source.width, event.nativeEvent.source.height) }}
+                      onLoad={event => { 
+                        // console.log(`VIEW YELLOW: ${JSON.stringify(event.nativeEvent.source)} AT INDEX: ${index}`);
+                        handleResize1(index, event.nativeEvent.source.width, event.nativeEvent.source.height) 
+                      }}
                       source={item.imgSource}
                       style={[styles.image, item.width && item.height ? { width: item.width, height: item.height } : {}]}
                     />
@@ -113,13 +122,16 @@ export default function App() {
               })
             }
           </View>
-          <View>
+          <View style={{backgroundColor: 'red'}}>
             {
-              imgs.slice(Math.round(imgs.length / 2)).map((item, index) => {
+              imgs2.map((item, index) => {
                 return (
-                  <TouchableOpacity key={item.id} style={{ padding: 0, margin: 0 }}>
+                  <TouchableOpacity key={item.id} style={{ padding: 0, margin: 0, backgroundColor: 'gray' }}>
                     <Image
-                      onLoad={event => { handleResize(index, event.nativeEvent.source.width, event.nativeEvent.source.height) }}
+                      onLoad={event => { {
+                        // console.log(`VIEW RED: ${JSON.stringify(event.nativeEvent.source)} AT INDEX: ${index}`);
+                        handleResize2(index, event.nativeEvent.source.width, event.nativeEvent.source.height) }
+                      }}
                       source={item.imgSource}
                       style={[styles.image, item.width && item.height ? { width: item.width, height: item.height } : {}]}
                     />
@@ -230,7 +242,7 @@ const styles = StyleSheet.create({
     height: 160,
     borderRadius: 20,
     alignSelf: "flex-start",
-    // backgroundColor: "red",
+    backgroundColor: "blue",
   },
   avatar: {
     width: 120,
